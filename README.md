@@ -5,6 +5,7 @@ The purpose of this project is to test and develop a working network testbed uti
 The Cognitive Radio Multimedia Network Testbed for multimedia communication (COMET) comprises of a network of Universal Software Radio Peripherals (USRP) configured to transmit data within the testbed. This is done through the USRP Hardware Driver that allows users on a Windows or Linux System to upload firmware onto the USRP’s RISC softcore microprocessor. The device accommodates many solutions for application development, including open-source platforms such as GNU Radio. This software works with the UHD drivers to provide a high-level design interface for Radio Frequency (RF) applications. This software is easily available on Unix based systems, which provide many needed dependencies missing in the Windows installation.
 <br />
 <br />
+<img align="center">
 ![Version 3.0](https://github.com/epires3/Senior-Design/blob/master/Network%20Diagram.png)
 ## Equipment
 * USRP N210 Software Defined Radio

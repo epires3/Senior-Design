@@ -1,0 +1,25 @@
+##################################################################################################################################
+PRIMARY SOURCES
+##################################################################################################################################
+https://newsroom.intel.com/wp-content/uploads/sites/11/2018/01/Intel-Analysis-of-Speculative-Execution-Side-Channels.pdf
+https://meltdownattack.com/meltdown.pdf
+https://googleprojectzero.blogspot.com/2018/01/reading-privileged-memory-with-side.html
+https://support.microsoft.com/en-us/help/4072698
+http://resources.infosecinstitute.com/meltdown-spectre-patches-story-delays-lies-failures/#gref
+https://spectrum.ieee.org/tech-talk/semiconductors/processors/how-the-intel-processor-meltdown-vulnerability-was-thwarted
+##################################################################################################################################
+SECONDARY SOURCES
+##################################################################################################################################
+https://access.redhat.com/security/cve/cve-2017-5754
+https://www.extremetech.com/computing/261792-what-is-speculative-execution
+https://www.wired.com/story/meltdown-spectre-patching-total-train-wreck/
+https://www.pcworld.com/article/3245606/security/intel-x86-cpu-kernel-bug-faq-how-it-affects-pc-mac.html
+https://www.nytimes.com/2018/01/03/business/computer-flaws.html
+##################################################################################################################################
+OTHER
+##################################################################################################################################
+https://github.com/IAIK/meltdown
+https://github.com/speed47/spectre-meltdown-checker
+https://winaero.com/blog/disable-meltdown-fix-amd-cpus-installing-kb4056892/
+
+

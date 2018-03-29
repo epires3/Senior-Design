@@ -305,7 +305,8 @@ if __name__ == '__main__':
 	recv = file.read()
 	start = recv.find(head)
 	end = recv.find(foot)
-	if (start != -1) and (end != -1):
+	if (start != -1) and (end != -1): 
+		start += 2
 		print(recv[start:end])
 		file.close()
    		x = False

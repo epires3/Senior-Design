@@ -28,11 +28,15 @@ from gnuradio.filter import firdes
 from gnuradio.qtgui import Range, RangeWidget
 from grc_gnuradio import blks2 as grc_blks2
 from optparse import OptionParser
+
 import sip
 import sys
 import time
+
 from gnuradio import qtgui
 
+head = "#/"
+foot = "/#"
 
 class RX(gr.top_block, Qt.QWidget):
 
@@ -295,3 +299,13 @@ def main(top_block_cls=RX, options=None):
 
 if __name__ == '__main__':
     main()
+    x = True
+    while x :
+	file = open('out.txt','r')
+	recv = file.read()
+	start = recv.find(head)
+	end = recv.find(foot)
+	if (start != -1) and (end != -1):
+		print(recv[start:end])
+		file.close()
+   		x = False

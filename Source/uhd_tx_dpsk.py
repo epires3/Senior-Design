@@ -36,7 +36,7 @@ from gnuradio import qtgui
 file = open('USRP_TX\TX.txt','w+')
 
 head = "#/"
-data = sys.argv[1]
+data = raw_input("Enter Message: ")
 foot = "/#"
 
 file.write(head+data+foot)

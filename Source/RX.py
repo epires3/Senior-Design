@@ -304,7 +304,7 @@ if __name__ == '__main__':
 	file = open('out.txt','r')
 	recv = file.read()
 	start = recv.find(head)
-	end = recv.find(foot)
+	end = recv.find(foot,start)
 	if (start != -1) and (end != -1): 
 		start += 2
 		print(recv[start:end])

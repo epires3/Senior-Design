@@ -31,10 +31,11 @@ from optparse import OptionParser
 import sip
 import sys
 import time
+import os
 
-head = "#/"
-foot = "/#"
-
+head = "\x89PNG"
+foot = "\x00IEND\xaeB`\x82"
+# You need to transmit a png file in binary mode and write to a png file in binary mode
 class top_block(gr.top_block, Qt.QWidget):
 
     def __init__(self):
@@ -107,13 +108,13 @@ class top_block(gr.top_block, Qt.QWidget):
         self.qtgui_freq_sink_x_0.enable_grid(False)
         self.qtgui_freq_sink_x_0.set_fft_average(1.0)
         self.qtgui_freq_sink_x_0.enable_control_panel(False)
-        
+
         if not True:
           self.qtgui_freq_sink_x_0.disable_legend()
-        
+
         if "complex" == "float" or "complex" == "msg_float":
           self.qtgui_freq_sink_x_0.set_plot_pos_half(not True)
-        
+
         labels = ["", "", "", "", "",
                   "", "", "", "", ""]
         widths = [1, 1, 1, 1, 1,
@@ -130,7 +131,7 @@ class top_block(gr.top_block, Qt.QWidget):
             self.qtgui_freq_sink_x_0.set_line_width(i, widths[i])
             self.qtgui_freq_sink_x_0.set_line_color(i, colors[i])
             self.qtgui_freq_sink_x_0.set_line_alpha(i, alphas[i])
-        
+
         self._qtgui_freq_sink_x_0_win = sip.wrapinstance(self.qtgui_freq_sink_x_0.pyqwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_freq_sink_x_0_win)
         self.digital_dxpsk_demod_0 = digital.dqpsk_demod(
@@ -143,7 +144,7 @@ class top_block(gr.top_block, Qt.QWidget):
         	verbose=False,
         	log=False
         )
-        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, "/home/test/Desktop/out.txt", False)
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_char*1, "/home/test/Desktop/RX.png", False)
         self.blocks_file_sink_0.set_unbuffered(False)
         self.blks2_packet_decoder_0 = grc_blks2.packet_demod_b(grc_blks2.packet_decoder(
         		access_code="",
@@ -155,10 +156,10 @@ class top_block(gr.top_block, Qt.QWidget):
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.blks2_packet_decoder_0, 0), (self.blocks_file_sink_0, 0))    
-        self.connect((self.digital_dxpsk_demod_0, 0), (self.blks2_packet_decoder_0, 0))    
-        self.connect((self.uhd_usrp_source_0, 0), (self.digital_dxpsk_demod_0, 0))    
-        self.connect((self.uhd_usrp_source_0, 0), (self.qtgui_freq_sink_x_0, 0))    
+        self.connect((self.blks2_packet_decoder_0, 0), (self.blocks_file_sink_0, 0))
+        self.connect((self.digital_dxpsk_demod_0, 0), (self.blks2_packet_decoder_0, 0))
+        self.connect((self.uhd_usrp_source_0, 0), (self.digital_dxpsk_demod_0, 0))
+        self.connect((self.uhd_usrp_source_0, 0), (self.qtgui_freq_sink_x_0, 0))
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "top_block")
@@ -201,6 +202,11 @@ class top_block(gr.top_block, Qt.QWidget):
         self.uhd_usrp_source_0.set_center_freq(self.freq, 0)
 
 
+def success():
+	print("--------------------------------------------")
+	print("Transmission Received")
+	print("--------------------------------------------\n")
+
 def main(top_block_cls=top_block, options=None):
 
     from distutils.version import StrictVersion
@@ -216,23 +222,12 @@ def main(top_block_cls=top_block, options=None):
     def quitting():
         tb.stop()
         tb.wait()
-    qapp.connect(qapp, Qt.SIGNAL("aboutToQuit()"), quitting)
+    qapp.connect(qapp, Qt.SIGNAL("aboutToQuit()"), quitting) 
     qapp.exec_()
-    while True :
-	file = open('out.txt','r')
-	recv = file.read()
-	start = recv.find(head)
-	end = recv.find(foot,start)
-	if (start != -1) and (end != -1): 
-		start += 2
-		file.close()
-    		break
-    return recv,start,end
+    
 
 if __name__ == '__main__':
-    out,s,e = main()
-    print("--------------------------------------------")
-    print("Transmission Received")
-    print("--------------------------------------------\n")
-    print(">" + out[s:e])
+    main()
+    
+    
     
